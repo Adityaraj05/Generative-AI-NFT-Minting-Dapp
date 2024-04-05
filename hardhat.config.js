@@ -15,5 +15,8 @@ module.exports = {
       url: `${ALCHEMY_URL}`,
       accounts: [`${ACCOUNT_PVT_KEY}`]
     }
-  }
+  },
+  paths: {
+    artifacts: "./src/artifacts"
+  },
 };

@@ -30,6 +30,8 @@ node_modules
 /cache
 /artifacts
 
+/src/artifacts
+
 # TypeChain files
 /typechain
 /typechain-types
