@@ -135,18 +135,26 @@ export const ContractProvider = ({ children }) => {
 
     }
 
-    const mintNFT = async (artName) => {
+    const mintNFT = async (artName, artDesc) => {
         try {
 
             const ipfsHash = await uploadToPinata(artName)
 
             const mintContract = await getEthereumContract()
 
-            const transaction = await mintContract.mintNFT(account, ipfsHash)
+            const tokenURI = `data:application/json;base64,${btoa(
+                JSON.stringify({
+                    artName,
+                    artDesc,
+                    image: ipfsHash,
+                })
+            )}`;
+
+            const transaction = await mintContract.mintNFT(account, tokenURI)
 
             await transaction.wait()
 
-            return transaction
+            return { ipfsHash, transaction }
 
         } catch (error) {
             console.log(error);
